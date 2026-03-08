@@ -1,0 +1,19 @@
+/* Waybar dark style */
+* {
+    font-family: "FiraCode Nerd Font", monospace;
+    color: #FFFFFF;
+    background: #1E1E2E;
+}
+
+#module-clock {
+    font-weight: bold;
+    color: #FF5C57;
+}
+
+#module-network {
+    color: #AAAAAA;
+}
+
+#module-battery {
+    color: #FFD700;
+}

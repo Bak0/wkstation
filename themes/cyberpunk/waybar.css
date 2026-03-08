@@ -1,0 +1,19 @@
+/* Waybar cyberpunk style */
+* {
+    font-family: "FiraCode Nerd Font", monospace;
+    color: #F0F0F0;
+    background: #1B1B2F;
+}
+
+#module-clock {
+    font-weight: bold;
+    color: #00FFEA;
+}
+
+#module-network {
+    color: #FF00FF;
+}
+
+#module-battery {
+    color: #FFEA00;
+}

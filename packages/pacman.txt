@@ -1,18 +1,56 @@
-# Base packages for Arch + Hyprland workstation
+# Core Wayland / Hyprland stack
 hyprland
 hyprlock
 hypridle
+hyprpaper
 waybar
 foot
-rofi-wayland
+rofi
+
+# Graphical login
+greetd
+greetd-regreet
+cage
+
+# Bluetooth / networking / filesystem / snapshots
 blueman
 bluez
 bluez-utils
 networkmanager
 btrfs-progs
+timeshift
+
+# Base utilities
 git
 wget
 curl
 unzip
+
+# Fonts
 ttf-dejavu
 ttf-font-awesome
+
+# Graphics - common base for Intel / mixed machines
+mesa
+vulkan-intel
+lib32-vulkan-intel
+
+# Apps
+filezilla
+btop
+spotify-launcher
+steam
+code
+cmatrix
+
+# Virtualization / Windows VM
+virt-manager
+libvirt
+qemu-full
+dnsmasq
+edk2-ovmf
+swtpm
+
+# NVIDIA extras - uncomment only on NVIDIA machines
+# nvidia-utils
+# lib32-nvidia-utils

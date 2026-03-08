@@ -1,1 +1,18 @@
-
+# Base packages for Arch + Hyprland workstation
+hyprland
+hyprlock
+hypridle
+waybar
+foot
+rofi-wayland
+blueman
+bluez
+bluez-utils
+networkmanager
+btrfs-progs
+git
+wget
+curl
+unzip
+ttf-dejavu
+ttf-font-awesome

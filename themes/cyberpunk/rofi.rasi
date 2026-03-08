@@ -1,0 +1,13 @@
+/* Rofi cyberpunk theme */
+configuration {
+    font: "FiraCode Nerd Font 10";
+    show-icons: true;
+    background: #1B1B2F;
+    foreground: #F0F0F0;
+    selected-background: #00FFEA;
+    selected-foreground: #1B1B2F;
+    border: 2px solid #00FFEA;
+    padding: 10px;
+    width: 30%;
+    columns: 1;
+}

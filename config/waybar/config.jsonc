@@ -1,0 +1,26 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["network", "bluetooth", "clock", "tray"],
+
+  "clock": {
+    "format": "{:%H:%M}"
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  Wired",
+    "format-disconnected": "󰖪  Offline"
+  },
+
+  "bluetooth": {
+    "format": "  {status}"
+  },
+
+  "tray": {
+    "spacing": 8
+  }
+}

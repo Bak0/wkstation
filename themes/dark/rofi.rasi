@@ -1,0 +1,13 @@
+/* Rofi dark theme */
+configuration {
+    font: "FiraCode Nerd Font 10";
+    show-icons: true;
+    background: #1E1E2E;
+    foreground: #FFFFFF;
+    selected-background: #FF5C57;
+    selected-foreground: #FFFFFF;
+    border: 2px solid #FF5C57;
+    padding: 10px;
+    width: 30%;
+    columns: 1;
+}

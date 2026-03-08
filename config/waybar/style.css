@@ -1,0 +1,24 @@
+@import "theme.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "DejaVu Sans", "Font Awesome 6 Free";
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+#workspaces,
+#window,
+#network,
+#bluetooth,
+#clock,
+#tray {
+  margin: 6px 6px 0 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}

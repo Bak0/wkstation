@@ -1,5 +1,2 @@
-# AUR packages
 brave-bin
-visual-studio-code-bin
 localsend-bin
-spotify

@@ -25,6 +25,7 @@ git
 wget
 curl
 unzip
+nautilus
 
 # Fonts
 ttf-dejavu

@@ -29,13 +29,20 @@ apply_theme() {
 
     ln -sfn "${theme_dir}" "${CURRENT_LINK}"
 
+    # Reload Hyprland config
     hyprctl reload >/dev/null 2>&1 || true
 
+    # Restart Waybar so new CSS is picked up
     pkill waybar >/dev/null 2>&1 || true
     nohup waybar >/dev/null 2>&1 &
 
+    # Restart hyprpaper and force it to use the active wallpaper
     pkill hyprpaper >/dev/null 2>&1 || true
     nohup hyprpaper >/dev/null 2>&1 &
+    sleep 0.5
+    hyprctl hyprpaper unload all >/dev/null 2>&1 || true
+    hyprctl hyprpaper preload "${WALL_DIR}/current.jpg" >/dev/null 2>&1 || true
+    hyprctl hyprpaper wallpaper ",${WALL_DIR}/current.jpg" >/dev/null 2>&1 || true
 }
 
 cycle_next() {

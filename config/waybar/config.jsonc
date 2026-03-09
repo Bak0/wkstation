@@ -11,9 +11,11 @@
   },
 
   "network": {
-    "format-wifi": "  {essid}",
-    "format-ethernet": "󰈀  Wired",
-    "format-disconnected": "󰖪  Offline"
+    "format-wifi": "{icon} {essid}",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰖪 Offline",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "on-click": "nm-connection-editor"
   },
 
   "pulseaudio": {

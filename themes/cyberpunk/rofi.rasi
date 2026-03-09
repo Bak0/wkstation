@@ -1,13 +1,51 @@
-/* Rofi cyberpunk theme */
-configuration {
-    font: "FiraCode Nerd Font 10";
-    show-icons: true;
-    background: #1B1B2F;
-    foreground: #F0F0F0;
-    selected-background: #00FFEA;
-    selected-foreground: #1B1B2F;
-    border: 2px solid #00FFEA;
-    padding: 10px;
+* {
+    bg: #1b1b2f;
+    bg-alt: #23233a;
+    fg: #f0f0f0;
+    accent: #00ffea;
+}
+
+window {
     width: 30%;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 12px;
+    background-color: @bg;
+}
+
+mainbox {
+    background-color: @bg;
+}
+
+inputbar {
+    padding: 8px;
+    background-color: @bg-alt;
+    text-color: @fg;
+}
+
+prompt {
+    background-color: inherit;
+    text-color: @accent;
+}
+
+entry {
+    background-color: inherit;
+    text-color: @fg;
+}
+
+listview {
+    lines: 8;
     columns: 1;
+    background-color: @bg;
+}
+
+element {
+    padding: 8px;
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: #1b1b2f;
 }

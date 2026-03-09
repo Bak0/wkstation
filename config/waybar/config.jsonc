@@ -22,7 +22,8 @@
   "format-icons": {
     "default": ["", "", ""]
   },
-  "scroll-step": 5
+  "scroll-step": 5,
+  "on-click": "pavucontrol"
 },
 
 "battery": {

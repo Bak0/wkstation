@@ -4,7 +4,7 @@
   "height": 30,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "bluetooth", "clock", "tray"],
+  "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "clock", "tray"],
 
   "clock": {
     "format": "{:%H:%M}"
@@ -23,4 +23,18 @@
   "tray": {
     "spacing": 8
   }
+
+  "pulseaudio": {
+  "format": "{volume}% {icon}",
+  "format-muted": "muted",
+  "format-icons": {
+    "default": ["", "", ""]
+  },
+  "scroll-step": 5
+},
+
+"battery": {
+  "format": "{capacity}% ",
+  "format-charging": "{capacity}% "
+},
 }

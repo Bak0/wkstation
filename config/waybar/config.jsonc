@@ -16,14 +16,6 @@
     "format-disconnected": "󰖪  Offline"
   },
 
-  "bluetooth": {
-    "format": "  {status}"
-  },
-
-  "tray": {
-    "spacing": 8
-  }
-
   "pulseaudio": {
   "format": "{volume}% {icon}",
   "format-muted": "muted",
@@ -37,4 +29,8 @@
   "format": "{capacity}% ",
   "format-charging": "{capacity}% "
 },
+
+  "tray": {
+    "spacing": 8
+  }
 }

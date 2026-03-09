@@ -1,0 +1,20 @@
+window#waybar {
+  background: transparent;
+  color: #5c4a56;
+}
+
+#workspaces,
+#window,
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+  background: rgba(255, 232, 243, 0.95);
+  color: #5c4a56;
+}
+
+#workspaces button.active {
+  background: #ffa6d9;
+  color: #ffffff;
+}

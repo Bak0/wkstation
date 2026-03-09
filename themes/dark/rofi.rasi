@@ -1,13 +1,51 @@
-/* Rofi dark theme */
-configuration {
-    font: "FiraCode Nerd Font 10";
-    show-icons: true;
-    background: #1E1E2E;
-    foreground: #FFFFFF;
-    selected-background: #FF5C57;
-    selected-foreground: #FFFFFF;
-    border: 2px solid #FF5C57;
-    padding: 10px;
+* {
+    bg: #1e1e2e;
+    bg-alt: #2a2a3a;
+    fg: #ffffff;
+    accent: #ff5c57;
+}
+
+window {
     width: 30%;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 12px;
+    background-color: @bg;
+}
+
+mainbox {
+    background-color: @bg;
+}
+
+inputbar {
+    padding: 8px;
+    background-color: @bg-alt;
+    text-color: @fg;
+}
+
+prompt {
+    background-color: inherit;
+    text-color: @accent;
+}
+
+entry {
+    background-color: inherit;
+    text-color: @fg;
+}
+
+listview {
+    lines: 8;
     columns: 1;
+    background-color: @bg;
+}
+
+element {
+    padding: 8px;
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: @fg;
 }

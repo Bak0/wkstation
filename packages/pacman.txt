@@ -62,6 +62,11 @@ wireplumber
 pavucontrol
 playerctl
 brightnessctl
+noto-fonts-emoji
+ttf-nerd-fonts-symbols
+rofi-emoji
+
+
 # NVIDIA extras - uncomment only on NVIDIA machines
 # nvidia-utils
 # lib32-nvidia-utils

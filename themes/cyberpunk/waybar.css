@@ -1,19 +1,21 @@
-/* Waybar cyberpunk style */
-* {
-    font-family: "FiraCode Nerd Font", monospace;
-    color: #F0F0F0;
-    background: #1B1B2F;
+window#waybar {
+  background: transparent;
+  color: #f0f0f0;
 }
 
-#module-clock {
-    font-weight: bold;
-    color: #00FFEA;
+#workspaces,
+#window,
+#network,
+#bluetooth,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+  background: rgba(27, 27, 47, 0.94);
+  color: #f0f0f0;
 }
 
-#module-network {
-    color: #FF00FF;
-}
-
-#module-battery {
-    color: #FFEA00;
+#workspaces button.active {
+  background: #00ffea;
+  color: #1b1b2f;
 }

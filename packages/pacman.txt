@@ -25,7 +25,6 @@ git
 wget
 curl
 unzip
-nautilus
 
 # Fonts
 ttf-dejavu
@@ -52,6 +51,17 @@ dnsmasq
 edk2-ovmf
 swtpm
 
+
+#added after
+remmina
+nautilus
+upower
+pipewire
+pipewire-pulse
+wireplumber
+pavucontrol
+playerctl
+brightnessctl
 # NVIDIA extras - uncomment only on NVIDIA machines
 # nvidia-utils
 # lib32-nvidia-utils

@@ -3,7 +3,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "Symbols Nerd Font", "Noto Color Emoji", "Font Awesome 6 Free", "DejaVu Sans", sans-serif;
+  font-family: "Symbols Nerd Font", "Font Awesome 6 Free", "DejaVu Sans", sans-serif;
   font-size: 13px;
   min-height: 0;
 }
@@ -15,7 +15,8 @@ window#waybar {
 #workspaces,
 #window,
 #network,
-#bluetooth,
+#pulseaudio,
+#battery,
 #clock,
 #tray {
   margin: 6px 6px 0 6px;

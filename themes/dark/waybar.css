@@ -1,19 +1,21 @@
-/* Waybar dark style */
-* {
-    font-family: "FiraCode Nerd Font", monospace;
-    color: #FFFFFF;
-    background: #1E1E2E;
+window#waybar {
+  background: transparent;
+  color: #ffffff;
 }
 
-#module-clock {
-    font-weight: bold;
-    color: #FF5C57;
+#workspaces,
+#window,
+#network,
+#bluetooth,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+  background: rgba(30, 30, 46, 0.92);
+  color: #ffffff;
 }
 
-#module-network {
-    color: #AAAAAA;
-}
-
-#module-battery {
-    color: #FFD700;
+#workspaces button.active {
+  background: #ff5c57;
+  color: #ffffff;
 }

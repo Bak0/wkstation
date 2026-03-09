@@ -12,6 +12,8 @@ window#waybar {
   background: transparent;
 }
 
+font-family: "Symbols Nerd Font", "Noto Color Emoji", "Font Awesome 6 Free", "DejaVu Sans", sans-serif;
+
 #workspaces,
 #window,
 #network,

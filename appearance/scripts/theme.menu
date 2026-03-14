@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+APPEARANCE_DIR="${WK_APPEARANCE_DIR:-$HOME/wkstation/appearance}"
+THEMES_DIR="${APPEARANCE_DIR}/themes"
+
+theme="$(find "${THEMES_DIR}" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort | rofi -dmenu -i -p 'Theme switch')"
+[[ -n "${theme:-}" ]] || exit 0
+
+"${HOME}/wkstation/appearance/scripts/theme-switch.sh" "${theme}"

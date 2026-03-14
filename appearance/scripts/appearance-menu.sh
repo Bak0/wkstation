@@ -9,8 +9,9 @@ main_choice="$(printf 'Themes\nWaybar\nRofi' | rofi -dmenu -i -p 'Appearance')"
 
 case "${main_choice}" in
     "Themes")
-        sub="$(printf 'Load preset\nSave as preset' | rofi -dmenu -i -p 'Themes')"
+        sub="$(printf 'Load preset\nSave as preset\nBackground options' | rofi -dmenu -i -p 'Themes')"
         [[ -n "${sub:-}" ]] || exit 0
+
         case "${sub}" in
             "Load preset")
                 choice="$("${CTL}" list-presets | rofi -dmenu -i -p 'Load preset')"
@@ -21,6 +22,32 @@ case "${main_choice}" in
                 name="$(printf '' | rofi -dmenu -p 'Save preset as')"
                 [[ -n "${name:-}" ]] || exit 0
                 "${CTL}" save-preset "${name}"
+                ;;
+            "Background options")
+                bgsub="$(printf 'Next background\nTimer' | rofi -dmenu -i -p 'Background options')"
+                [[ -n "${bgsub:-}" ]] || exit 0
+
+                case "${bgsub}" in
+                    "Next background")
+                        "${CTL}" cycle-background
+                        ;;
+                    "Timer")
+                        timer_choice="$(printf '5 minutes\n10 minutes\nDisable timer' | rofi -dmenu -i -p 'Background timer')"
+                        [[ -n "${timer_choice:-}" ]] || exit 0
+
+                        case "${timer_choice}" in
+                            "5 minutes")
+                                "${CTL}" install-background-timer 5
+                                ;;
+                            "10 minutes")
+                                "${CTL}" install-background-timer 10
+                                ;;
+                            "Disable timer")
+                                "${CTL}" disable-background-timer
+                                ;;
+                        esac
+                        ;;
+                esac
                 ;;
         esac
         ;;

@@ -1,0 +1,17 @@
+#workspaces,
+#window,
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+  margin: 6px 6px 0 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+#workspaces button {
+  border-radius: 8px;
+  margin: 0 2px;
+  padding: 0 6px;
+}

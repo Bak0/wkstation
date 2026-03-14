@@ -36,10 +36,9 @@ vulkan-intel
 lib32-vulkan-intel
 
 # Apps
-filezilla
-btop
-spotify-launcher
-steam
+#filezilla
+#btop
+#steam
 code
 cmatrix
 
@@ -53,7 +52,7 @@ swtpm
 
 
 #added after
-remmina
+#remmina
 nautilus
 upower
 pipewire

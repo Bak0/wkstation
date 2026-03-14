@@ -5,3 +5,5 @@ configuration {
 }
 
 @theme "~/.config/rofi/theme.rasi"
+@import "~/.config/rofi/layout.rasi"
+@import "~/.config/rofi/variant.rasi"

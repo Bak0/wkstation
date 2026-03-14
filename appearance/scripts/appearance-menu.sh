@@ -4,19 +4,25 @@ set -Eeuo pipefail
 APP_DIR="${WK_APPEARANCE_DIR:-$HOME/wkstation/appearance}"
 CTL="${APP_DIR}/scripts/appearance-controller.sh"
 
-main_choice="$(printf 'Load preset\nSave preset\nWaybar\nRofi\nBackgrounds' | rofi -dmenu -i -p 'Appearance')"
+main_choice="$(printf 'Themes\nWaybar\nRofi' | rofi -dmenu -i -p 'Appearance')"
 [[ -n "${main_choice:-}" ]] || exit 0
 
 case "${main_choice}" in
-    "Load preset")
-        choice="$("${CTL}" list-presets | rofi -dmenu -i -p 'Load preset')"
-        [[ -n "${choice:-}" ]] || exit 0
-        "${CTL}" load-preset "${choice}"
-        ;;
-    "Save preset")
-        name="$(printf '' | rofi -dmenu -p 'Save preset as')"
-        [[ -n "${name:-}" ]] || exit 0
-        "${CTL}" save-preset "${name}"
+    "Themes")
+        sub="$(printf 'Load preset\nSave as preset' | rofi -dmenu -i -p 'Themes')"
+        [[ -n "${sub:-}" ]] || exit 0
+        case "${sub}" in
+            "Load preset")
+                choice="$("${CTL}" list-presets | rofi -dmenu -i -p 'Load preset')"
+                [[ -n "${choice:-}" ]] || exit 0
+                "${CTL}" load-preset "${choice}"
+                ;;
+            "Save as preset")
+                name="$(printf '' | rofi -dmenu -p 'Save preset as')"
+                [[ -n "${name:-}" ]] || exit 0
+                "${CTL}" save-preset "${name}"
+                ;;
+        esac
         ;;
     "Waybar")
         sub="$(printf 'Position\nStyle' | rofi -dmenu -i -p 'Waybar')"
@@ -50,11 +56,4 @@ case "${main_choice}" in
                 ;;
         esac
         ;;
-    "Backgrounds")
-        choice="$("${CTL}" list-backgrounds | rofi -dmenu -i -p 'Preset backgrounds')"
-        [[ -n "${choice:-}" ]] || exit 0
-        "${CTL}" apply-background "${choice}"
-        ;;
 esac
-
-main "$@"

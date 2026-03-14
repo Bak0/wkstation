@@ -8,7 +8,6 @@ WAYBAR_POS_DIR="${APP_DIR}/waybar/position"
 WAYBAR_STYLE_DIR="${APP_DIR}/waybar/style"
 ROFI_LAYOUT_DIR="${APP_DIR}/rofi/layout"
 ROFI_STYLE_DIR="${APP_DIR}/rofi/style"
-BG_STILL_DIR="${APP_DIR}/backgrounds/still"
 
 HYPR_DIR="${HOME}/.config/hypr"
 WAYBAR_DIR="${HOME}/.config/waybar"
@@ -48,16 +47,11 @@ reload_wallpaper() {
     hyprctl hyprpaper wallpaper ",${WALL_DIR}/current.jpg" >/dev/null 2>&1 || true
 }
 
-default_background_for_preset() {
+first_background_in_preset() {
     local preset="$1"
-    local ext
-
-    for ext in jpg jpeg png webp; do
-        if [[ -f "${BG_STILL_DIR}/${preset}.${ext}" ]]; then
-            printf '%s\n' "${preset}.${ext}"
-            return
-        fi
-    done
+    find "${PRESETS_DIR}/${preset}/backgrounds" -maxdepth 1 -type f \
+        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+        -printf '%f\n' | sort | head -n 1
 }
 
 apply_preset_only() {
@@ -76,9 +70,9 @@ apply_preset_only() {
     state_set current_preset "${preset}"
 
     local bg
-    bg="$(default_background_for_preset "${preset}")"
+    bg="$(first_background_in_preset "${preset}")"
     if [[ -n "${bg}" ]]; then
-        cp "${BG_STILL_DIR}/${bg}" "${WALL_DIR}/current.jpg"
+        cp "${dir}/backgrounds/${bg}" "${WALL_DIR}/current.jpg"
         state_set current_background "${bg}"
     fi
 }
@@ -119,23 +113,6 @@ list_presets() {
     find "${PRESETS_DIR}" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort
 }
 
-list_current_preset_backgrounds() {
-    find "${BG_STILL_DIR}" -maxdepth 1 -type f \
-        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
-        -printf '%f\n' | sort
-}
-
-apply_background_from_current_preset() {
-    local name="$1"
-    local src="${BG_STILL_DIR}/${name}"
-
-    [[ -f "${src}" ]] || { echo "Background not found: ${name}"; exit 1; }
-
-    cp "${src}" "${WALL_DIR}/current.jpg"
-    state_set current_background "${name}"
-    reload_wallpaper
-}
-
 load_preset() {
     local preset="$1"
     apply_preset_only "${preset}"
@@ -149,16 +126,17 @@ save_preset() {
     [[ -n "${name}" ]] || { echo "Preset name required"; exit 1; }
 
     local dest="${PRESETS_DIR}/${name}"
-    mkdir -p "${dest}" "${BG_STILL_DIR}"
+    mkdir -p "${dest}/backgrounds"
 
     cp "${HYPR_DIR}/theme.conf" "${dest}/hypr.conf"
     cp "${WAYBAR_DIR}/theme.css" "${dest}/waybar.css"
     cp "${ROFI_DIR}/theme.rasi" "${dest}/rofi.rasi"
 
     if [[ -f "${WALL_DIR}/current.jpg" ]]; then
-        cp "${WALL_DIR}/current.jpg" "${BG_STILL_DIR}/${name}.jpg"
-        state_set current_background "${name}.jpg"
+        cp "${WALL_DIR}/current.jpg" "${dest}/backgrounds/current.jpg"
+        state_set current_background "current.jpg"
     fi
+
     state_set current_preset "${name}"
 }
 
@@ -187,8 +165,6 @@ appearance-controller.sh list-presets
 appearance-controller.sh load-preset NAME
 appearance-controller.sh save-preset NAME
 appearance-controller.sh cycle-preset
-appearance-controller.sh list-backgrounds
-appearance-controller.sh apply-background NAME
 appearance-controller.sh apply-waybar-position NAME
 appearance-controller.sh apply-waybar-style NAME
 appearance-controller.sh apply-rofi-layout NAME
@@ -204,8 +180,6 @@ main() {
         load-preset) [[ -n "${2:-}" ]] || { usage; exit 1; }; load_preset "$2" ;;
         save-preset) [[ -n "${2:-}" ]] || { usage; exit 1; }; save_preset "$2" ;;
         cycle-preset) cycle_preset ;;
-        list-backgrounds) list_current_preset_backgrounds ;;
-        apply-background) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_background_from_current_preset "$2" ;;
         apply-waybar-position) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_position_only "$2"; restart_waybar ;;
         apply-waybar-style) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_style_only "$2"; restart_waybar ;;
         apply-rofi-layout) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_rofi_layout_only "$2" ;;

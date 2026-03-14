@@ -1,4 +1,5 @@
 @import "theme.css";
+@import "variant.css";
 
 * {
   border: none;

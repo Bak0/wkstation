@@ -1,0 +1,20 @@
+install_background_timer() {
+    local interval="$1"
+    local user_systemd_dir="${HOME}/.config/systemd/user"
+    local src_service="${APP_DIR}/scripts/wkstation-background-rotate.service"
+    local src_timer=""
+
+    case "${interval}" in
+        5)  src_timer="${APP_DIR}/scripts/wkstation-background-rotate-5m.timer" ;;
+        10) src_timer="${APP_DIR}/scripts/wkstation-background-rotate-10m.timer" ;;
+        *) echo "Invalid timer interval: ${interval}"; exit 1 ;;
+    esac
+
+    mkdir -p "${user_systemd_dir}"
+    cp "${src_service}" "${user_systemd_dir}/wkstation-background-rotate.service"
+    cp "${src_timer}" "${user_systemd_dir}/wkstation-background-rotate.timer"
+}
+
+disable_background_timer() {
+    systemctl --user disable --now wkstation-background-rotate.timer >/dev/null 2>&1 || true
+}

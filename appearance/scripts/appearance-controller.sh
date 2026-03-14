@@ -202,6 +202,27 @@ cycle_background() {
     apply_background_from_current_preset "${bgs[$next_index]}"
 }
 
+install_background_timer() {
+    local interval="$1"
+    local user_systemd_dir="${HOME}/.config/systemd/user"
+    local src_service="${APP_DIR}/scripts/wkstation-background-rotate.service"
+    local src_timer=""
+
+    case "${interval}" in
+        5)  src_timer="${APP_DIR}/scripts/wkstation-background-rotate-5m.timer" ;;
+        10) src_timer="${APP_DIR}/scripts/wkstation-background-rotate-10m.timer" ;;
+        *) echo "Invalid timer interval: ${interval}"; exit 1 ;;
+    esac
+
+    mkdir -p "${user_systemd_dir}"
+    cp "${src_service}" "${user_systemd_dir}/wkstation-background-rotate.service"
+    cp "${src_timer}" "${user_systemd_dir}/wkstation-background-rotate.timer"
+}
+
+disable_background_timer() {
+    systemctl --user disable --now wkstation-background-rotate.timer >/dev/null 2>&1 || true
+}
+
 
 usage() {
     cat <<'EOF'
@@ -212,12 +233,15 @@ appearance-controller.sh cycle-preset
 appearance-controller.sh list-backgrounds
 appearance-controller.sh apply-background NAME
 appearance-controller.sh cycle-background
+appearance-controller.sh install-background-timer 5|10
+appearance-controller.sh disable-background-timer
 appearance-controller.sh apply-waybar-position NAME
 appearance-controller.sh apply-waybar-style NAME
 appearance-controller.sh apply-rofi-layout NAME
 appearance-controller.sh apply-rofi-style NAME
 EOF
 }
+
 
 main() {
     ensure_dirs
@@ -230,12 +254,15 @@ main() {
         list-backgrounds) list_current_preset_backgrounds ;;
         apply-background) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_background_from_current_preset "$2" ;;
         cycle-background) cycle_background ;;
+        install-background-timer) [[ -n "${2:-}" ]] || { usage; exit 1; }; install_background_timer "$2" ;;
+        disable-background-timer) disable_background_timer ;;
         apply-waybar-position) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_position_only "$2"; restart_waybar ;;
         apply-waybar-style) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_style_only "$2"; restart_waybar ;;
         apply-rofi-layout) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_rofi_layout_only "$2" ;;
         apply-rofi-style) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_rofi_style_only "$2" ;;
         *) usage; exit 1 ;;
     esac
+
 }
 
 main "$@"

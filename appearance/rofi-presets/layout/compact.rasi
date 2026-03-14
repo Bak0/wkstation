@@ -1,0 +1,13 @@
+window {
+    width: 28%;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    dynamic: false;
+}
+
+mainbox {
+    spacing: 8px;
+}

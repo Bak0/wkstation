@@ -1,0 +1,6 @@
+[Unit]
+Description=Rotate current preset background
+
+[Service]
+Type=oneshot
+ExecStart=/home/bakk/wkstation/appearance/scripts/appearance-controller.sh cycle-background

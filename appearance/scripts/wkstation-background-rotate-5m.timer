@@ -1,0 +1,10 @@
+[Unit]
+Description=Rotate current preset background every 5 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+Unit=wkstation-background-rotate.service
+
+[Install]
+WantedBy=timers.target

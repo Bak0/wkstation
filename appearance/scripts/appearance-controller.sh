@@ -159,12 +159,59 @@ cycle_preset() {
     load_preset "${presets[$next_index]}"
 }
 
+list_current_preset_backgrounds() {
+    local preset
+    preset="$(state_get current_preset "")"
+    [[ -n "${preset}" ]] || exit 0
+
+    find "${PRESETS_DIR}/${preset}/backgrounds" -maxdepth 1 -type f \
+        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+        -printf '%f\n' | sort
+}
+
+apply_background_from_current_preset() {
+    local name="$1"
+    local preset
+    preset="$(state_get current_preset "")"
+    [[ -n "${preset}" ]] || { echo "No current preset"; exit 1; }
+
+    local src="${PRESETS_DIR}/${preset}/backgrounds/${name}"
+    [[ -f "${src}" ]] || { echo "Background not found: ${name}"; exit 1; }
+
+    cp "${src}" "${WALL_DIR}/current.jpg"
+    state_set current_background "${name}"
+    reload_wallpaper
+}
+
+cycle_background() {
+    mapfile -t bgs < <(list_current_preset_backgrounds)
+    [[ ${#bgs[@]} -gt 0 ]] || exit 1
+
+    local current
+    current="$(state_get current_background "")"
+
+    local next_index=0
+    local i
+    for i in "${!bgs[@]}"; do
+        if [[ "${bgs[$i]}" == "${current}" ]]; then
+            next_index=$(( (i + 1) % ${#bgs[@]} ))
+            break
+        fi
+    done
+
+    apply_background_from_current_preset "${bgs[$next_index]}"
+}
+
+
 usage() {
     cat <<'EOF'
 appearance-controller.sh list-presets
 appearance-controller.sh load-preset NAME
 appearance-controller.sh save-preset NAME
 appearance-controller.sh cycle-preset
+appearance-controller.sh list-backgrounds
+appearance-controller.sh apply-background NAME
+appearance-controller.sh cycle-background
 appearance-controller.sh apply-waybar-position NAME
 appearance-controller.sh apply-waybar-style NAME
 appearance-controller.sh apply-rofi-layout NAME
@@ -180,6 +227,9 @@ main() {
         load-preset) [[ -n "${2:-}" ]] || { usage; exit 1; }; load_preset "$2" ;;
         save-preset) [[ -n "${2:-}" ]] || { usage; exit 1; }; save_preset "$2" ;;
         cycle-preset) cycle_preset ;;
+        list-backgrounds) list_current_preset_backgrounds ;;
+        apply-background) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_background_from_current_preset "$2" ;;
+        cycle-background) cycle_background ;;
         apply-waybar-position) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_position_only "$2"; restart_waybar ;;
         apply-waybar-style) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_waybar_style_only "$2"; restart_waybar ;;
         apply-rofi-layout) [[ -n "${2:-}" ]] || { usage; exit 1; }; apply_rofi_layout_only "$2" ;;

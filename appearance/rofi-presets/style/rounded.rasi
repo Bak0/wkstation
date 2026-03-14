@@ -1,0 +1,18 @@
+window {
+    border: 2px;
+    border-radius: 16px;
+}
+
+inputbar {
+    padding: 10px;
+    border-radius: 12px;
+}
+
+element {
+    padding: 8px;
+    border-radius: 10px;
+}
+
+element selected {
+    border-radius: 10px;
+}
